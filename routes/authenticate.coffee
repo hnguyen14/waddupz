@@ -1,6 +1,5 @@
 passport = require '../config/facebook-passport'
 db = require '../config/cradle'
-User = require('../models/users')(db)
 
 module.exports = (app) ->
   app.get '/login', (req, res) ->

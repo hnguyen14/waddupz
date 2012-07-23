@@ -1,7 +1,6 @@
 passport = require 'passport'
-db = require './cradle'
 FacebookStrategy = require('passport-facebook').Strategy
-User = require('../models/users')(db)
+User = require '../models/users'
 
 FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID
 FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET
@@ -13,9 +12,9 @@ passport.use new FacebookStrategy(
   clientSecret: FACEBOOK_APP_SECRET
   callbackURL : callbackUrl
 , (accessToken, refreshToken, profile, done) ->
-    User.findOrCreate profile, (err, user) ->
-      return done err if err
-      done null, user
+  User.findOrCreate profile, (err, user) ->
+    return done err if err
+    done null, user
 )
 
 passport.serializeUser (user, done) ->

@@ -11,8 +11,7 @@ app.configure ->
   app.set "views", __dirname + "/views"
   app.set "view engine", "coffee"
   app.register '.coffee', require('coffeekup').adapters.express
-  app.use express.bodyParser
-    uploadDir: process.env.UPLOAD_DIR
+  app.use express.bodyParser()
   app.use express.methodOverride()
   app.use express.cookieParser()
   app.use express.session
