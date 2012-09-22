@@ -11,7 +11,7 @@ module.exports = (app) ->
 
   app.get '/logout', (req, res) ->
     req.logout()
-    delete req.session.user
+    delete req.user
     res.writeHead 303,
       Location: '/'
     res.end()

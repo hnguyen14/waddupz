@@ -34,7 +34,9 @@ require('./routes/index')(app)
 app.dynamicHelpers
   passport: (req, res) ->
     data = {}
-    data.user = req.user?.authHash
+    if req.user
+      data.user = req.user.authHash
+      data.user._id = req.user._id
     return data
 
 app.listen process.env.PORT || 3000

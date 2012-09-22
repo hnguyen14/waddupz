@@ -5,4 +5,7 @@ module.exports = (app) ->
     keywords = req.body.keywords.split(',')
     req.body.keywords = keywords
     Post.create req.body, (err, post) ->
-      res.render 'index', title: post.title
+      if err
+        res.send 500, err
+      else
+        res.send 200, post

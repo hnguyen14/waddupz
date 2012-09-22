@@ -33,3 +33,12 @@ User = module.exports =
     db.view 'User/by_facebook_id', {startkey: facebookId, include_docs: true}, (err, res) ->
       return cb err if err
       cb null, res[0]?.doc
+
+  update: (userId, data, cb) ->
+    db.get userId, (err, user) ->
+      return cb err if err
+      if data.keyword
+        user.keywords or= []
+        user.keywords.push data.keyword if user.keywords.indexOf(data.keyword) < 0
+
+      db.save user, cb
